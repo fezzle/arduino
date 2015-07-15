@@ -21,7 +21,7 @@ enum {  GREEN=0, OFF, RED, YELLOW };
 
 char light;
 unsigned long last_change;
-char message[20] = { 0 };
+char message[41] = { 0 };
 
 char RED_STR[] PROGMEM = "Red";
 char GREEN_STR[] PROGMEM = "Grn";
@@ -152,7 +152,7 @@ void setup() {
 
 
 void check_serial() {
-  static char buffer[20];
+  static char buffer[41];
   static int pos = 0;
   
   while (Serial.available()) {
@@ -210,7 +210,9 @@ void update_display() {
   char buffer[15];
   uView.clear(PAGE);          // clear page
 
-  strcpy_PF(buffer, PSTR("T:"));
+  buffer[0] = ' ';
+  buffer[1] = ' ';
+  buffer[2] = '\0';
   strcat_time(buffer);
   uView.setCursor(0, (0)*uView.getFontHeight());
   uView.print(buffer);
